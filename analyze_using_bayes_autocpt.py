@@ -2,7 +2,7 @@ from pandas import DataFrame
 import pandas as pd
 import math
 import numpy as np
-#from scipy.stats import variation
+
 
 from pgmpy.models import BayesianModel
 from pgmpy.estimators import BayesianEstimator
@@ -68,7 +68,7 @@ for i in d_df['hits']:
 ## bayes
 bayes_rank_values=[]
 
-# clinic:['age','symptom','travel','sex','vaccination']
+# weights for hits and coverage 7:3
 weights_all={'risk':[7,3]}
 
 # basic functions for implementing the algorithm for auto-generating CPTs
@@ -91,7 +91,6 @@ def auto_area(score,num_of_child_state):
 	area_list=[]
 	prob_max_state=score
 	prob_min_state=Decimal(1.0)-score
-	#num_inner_points=num_of_child-1
 	if prob_max_state>=prob_min_state:
 		maxv=prob_max_state
 		minv=prob_min_state
