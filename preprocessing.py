@@ -21,8 +21,8 @@ def get_params_50mer():
 	return params
 
 #set default params for generating batches of 100-mer
-def get_params_100mer():
-        params = {'batch_size': 51,
+def get_params_150mer():
+        params = {'batch_size': 101,
         'n_classes': 187,
         'shuffle': False}
         return params
@@ -43,7 +43,7 @@ def get_kmer_from_50mer(filepath):
 
 #get k-mers, labels and locations for 100-mer
 #default format for each line of training files: kmer+"\t"+label+"\t"+location
-def get_kmer_from_100mer(filepath):
+def get_kmer_from_150mer(filepath):
 	f=open(filepath,"r").readlines()
 	f_matrix=[]
 	f_labels=[]
@@ -149,8 +149,8 @@ class DataGenerator_from_50mer_testing(keras.utils.Sequence):
 		return x_tensor
 
 #data generator for generating batches of data from 100-mers
-class DataGenerator_from_100mer(keras.utils.Sequence):
-	def __init__(self, f_matrix, batch_size=51,n_classes=187, shuffle=False):
+class DataGenerator_from_150mer(keras.utils.Sequence):
+	def __init__(self, f_matrix, batch_size=101,n_classes=187, shuffle=False):
 		self.batch_size = batch_size
 		self.matrix = f_matrix
 		self.n_classes = n_classes
