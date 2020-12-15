@@ -31,7 +31,7 @@ with open ("./data/final_report_UW1","r") as f:
 		total_hits+=int(line[1])
 	print(total_hits)
 	print(total_region)
-	ave_hits=math.ceil((total_hits*0.05)/total_region)
+	ave_hits=math.ceil((total_hits*0.1)/total_region)
 	print(ave_hits)
 
 for line in fread.readlines():
@@ -168,24 +168,27 @@ infer=create_model(hits,coverage,risk)
 
 for i in range(len(d_df['hits'])):
 	Evidence={}
-	if d_df['hits'][i]<0.01:
+	hits_value=d_df['hits'][i]/100.0
+	if hits_value<0.01:
 		Evidence['Hits']=0
-	elif 0.01 <= d_df['hits'][i] <0.03:
+	elif 0.01 <= hits_value <0.03:
 		Evidence['Hits']=1
-	elif 0.03 <= d_df['hits'][i] <0.05:
+	elif 0.03 <= hits_value <0.05:
 		Evidence['Hits']=2
-	elif 0.05 <= d_df['hits'][i] <0.1:
+	elif 0.05 <= hits_value <0.1:
 		Evidence['Hits']=3
-	elif 0.1 <= d_df['hits'][i] <0.2:
+	elif 0.1 <= hits_value <0.2:
 		Evidence['Hits']=4
-	elif 0.2 <= d_df['hits'][i] <0.3:
+	elif 0.2 <= hits_value <0.3:
 		Evidence['Hits']=5
-	elif 0.3 <= d_df['hits'][i] <0.5:
+	elif 0.3 <= hits_value <0.5:
 		Evidence['Hits']=6
 	else:
 		Evidence['Hits']=7
-
-	Evidence['Coverage']=d_df['region'][i]
+	if d_df['region'][i]==0:
+		Evidence['Coverage']=0
+	else:
+		Evidence['Coverage']=d_df['region'][i]
 	value = vars(infer.query(['Risk'], evidence=Evidence))['values'].tolist()
 	max_value=value[1]
 	bayes_rank_values.append(max_value)
