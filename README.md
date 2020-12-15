@@ -15,7 +15,7 @@ The following data are avaliable via Google Drive (https://drive.google.com/open
 - The weights of species for adjusting the loss in training
 - 50-mers and 150-mers simulated from ICTV dataset
 - Three simualetd HIV-1 datasets with different divergence
-- 4 real RNA-Seq datasets from ncbi are avaliable under data/real-world-data folder
+- Four real RNA-Seq datasets from ncbi are avaliable under data/real-world-data folder
 
 
 ## To use the pre-trained model to repeat benchmarking results:
