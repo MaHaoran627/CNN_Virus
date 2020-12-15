@@ -41,7 +41,7 @@ def get_kmer_from_50mer(filepath):
 		f_pos.append(i[2])
 	return f_matrix,f_labels,f_pos
 
-#get k-mers, labels and locations for 100-mer
+#get k-mers, labels and locations for 150-mer
 #default format for each line of training files: kmer+"\t"+label+"\t"+location
 def get_kmer_from_150mer(filepath):
 	f=open(filepath,"r").readlines()
@@ -60,7 +60,28 @@ def get_kmer_from_150mer(filepath):
 #get k-mers from RNA-seq files of COV-ID-19 patients
 #default format for each line of training files: kmer
 def get_kmer_from_realdata(filepath):
-	f=open(filepath,"r").readlines()[0:10240]
+	f=open(filepath,"r").readlines()
+	lines=[]
+	for i in range(0,len(f),4):
+		lines.append(f[i+1].strip())
+	f_matrix=[]
+	f_index=[]
+	sum_loc=0
+	for line in lines:
+		line=line.strip()
+		length_of_read=len(line)
+		if length_of_read>=50:
+			for i in range(len(line)-49):
+				kmer=line[i:i+50]
+				f_matrix.append(kmer)
+				sum_loc+=1
+			f_index.append(sum_loc)
+	return f_matrix,f_index
+
+# simulated hiv-1 reads using santa-sim
+# input: fastq format
+def get_kmer_from_santi(filepath):
+	f=open(filepath,"r").readlines()
 	lines=[]
 	for i in range(0,len(f),4):
 		lines.append(f[i+1].strip())
