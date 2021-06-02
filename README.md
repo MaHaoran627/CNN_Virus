@@ -1,7 +1,9 @@
 # A multi-task CNN model for taxonomic assignment of human viruses
 
 ## Update
+
 We have added SARS-CoV-2 genomes from ICTV in the training data and have updated the model. The re-trained model "pretrained_model_add_SARS-CoV-2.h5" has been uploaded in the google drive.
+
 ---
 
 In this project, a CNN-based multi-task learning model was developed. This model takes raw K-mers with original sequence information as inputs, and provide two values as outputs------the likelihood values of prediction for taxonomic assignment and for location. A taxonomic report can be generated based on input files by using this model.
